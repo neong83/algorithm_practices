@@ -6,9 +6,10 @@ def resort_priority_array(array, current_index):
         return array
 
     if array[current_index] < array[current_index - 1]:
-        temp = array[current_index - 1]
-        array[current_index - 1] = array[current_index]
-        array[current_index] = temp
+        array[current_index - 1], array[current_index] = (
+            array[current_index],
+            array[current_index - 1],
+        )
 
         array = resort_priority_array(array, current_index - 1)
     return array

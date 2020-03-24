@@ -4,11 +4,9 @@ def bubble_sort(array):
 
     while n >= 0:
         for i in range(n):
-            print(f'i = {i}  n = {n}')
+            print(f"i = {i}  n = {n}")
             if i + 1 < n and array[i] > array[i + 1]:
-                temp = array[i + 1]
-                array[i + 1] = array[i]
-                array[i] = temp
+                array[i + 1], array[i] = array[i], array[i + 1]
         n -= 1
     return array
 

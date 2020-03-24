@@ -19,8 +19,7 @@ def quick_sort(array, low, high):
     # handle pivot is larger than number on its right
     if low == high:
         if mid - 1 >= 0 and array[mid - 1] > pivot:
-            array[mid] = array[mid - 1]
-            array[mid - 1] = pivot
+            array[mid], array[mid - 1] = array[mid - 1], array[mid]
         return array
 
     for i in range(low, mid + 1, 1):
@@ -28,9 +27,7 @@ def quick_sort(array, low, high):
             # print(f"process i={i}, j={j}")
             if array[i] >= pivot > array[j]:
                 # print(f"i = {i}, j = {j}, swap {array[i]} with {array[j]}")
-                temp = array[i]
-                array[i] = array[j]
-                array[j] = temp
+                array[i], array[j] = array[j], array[i]
                 # print(f"result = {array}")
 
     # print(f"array = {array}")
