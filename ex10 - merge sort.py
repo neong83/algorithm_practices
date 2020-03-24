@@ -9,27 +9,28 @@ def merge_arrays_into_array_with_sorted(first_array, second_array):
     if not second_array:
         return first_array
 
-    i = 0
-    j = 0
     merged_array = []
 
     print(
         f"first array = {first_array}, second array = {second_array}, merged array = {merged_array}"
     )
 
-    while i < len(first_array) or j < len(second_array):
-        print(f"i = {i}, j = {j}, merged array = {merged_array}")
-        if j >= len(second_array) or (
-                i < len(first_array) and first_array[i] < second_array[j]
-        ):
-            merged_array.append(first_array[i])
-            i += 1
+    while first_array and second_array:
+        print(f"i = {first_array}, j = {second_array}, merged array = {merged_array}")
 
-        elif i >= len(first_array) or (
-                j < len(second_array) and first_array[i] > second_array[j]
-        ):
-            merged_array.append(second_array[j])
-            j += 1
+        if first_array[0] < second_array[0]:
+            merged_array.append(first_array.pop(0))
+
+        elif first_array[0] > second_array[0]:
+            merged_array.append(second_array.pop(0))
+
+    # clean up remainder in first array
+    while first_array:
+        merged_array.append(first_array.pop(0))
+
+    # clean up remainder in second array
+    while second_array:
+        merged_array.append(second_array.pop(0))
 
     print(
         f"first array = {first_array}, second array = {second_array}, merged array = {merged_array}"
