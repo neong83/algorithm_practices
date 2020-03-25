@@ -17,8 +17,7 @@ class BinaryTree:
     def __obtain_proper_node_for_new_node(self, new_node, root_node, child_node):
         if not child_node:
             return root_node
-        else:
-            return self.get_start_node_for_node(new_node, child_node)
+        return self.get_start_node_for_node(new_node, child_node)
 
     def get_start_node_for_node(self, new_node, root):
         if not root:
@@ -27,8 +26,9 @@ class BinaryTree:
         # print(f" - start node ={root}, new node ={new_node}")
         if root.value > new_node.value:
             return self.__obtain_proper_node_for_new_node(new_node, root, root.left)
-        elif root.value <= new_node.value:
-            return self.__obtain_proper_node_for_new_node(new_node, root, root.right)
+
+        # root.value <= new_node.value:
+        return self.__obtain_proper_node_for_new_node(new_node, root, root.right)
 
     def add(self, new_node: Node, start_node):
         # print(f"start node = {start_node}, new node = {new_node}")
