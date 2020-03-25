@@ -14,7 +14,6 @@ def selection_sort(array):
         if swap_to > 0:
             array[swap_from], array[swap_to] = array[swap_to], array[swap_from]
 
-    return array
 
-
-print(selection_sort(a))
+selection_sort(a)
+print(a)

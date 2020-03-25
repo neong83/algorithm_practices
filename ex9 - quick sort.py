@@ -10,7 +10,7 @@ def quick_sort(array, low, high):
     # print(f"array={array}, low={low}, high={high}")
 
     if low > high:
-        return array
+        return
 
     mid = low + (high - low) // 2
     # print(f"mid = {mid}")
@@ -20,7 +20,7 @@ def quick_sort(array, low, high):
     if low == high:
         if mid - 1 >= 0 and array[mid - 1] > pivot:
             array[mid], array[mid - 1] = array[mid - 1], array[mid]
-        return array
+        return
 
     for i in range(low, mid + 1, 1):
         for j in range(high, mid, -1):
@@ -33,12 +33,13 @@ def quick_sort(array, low, high):
     # print(f"array = {array}")
 
     if low < mid:
-        array = quick_sort(array, low, mid)
+        quick_sort(array, low, mid)
     if mid < high:
-        array = quick_sort(array, mid + 1, high)
+        quick_sort(array, mid + 1, high)
 
-    return array
+    return
 
 
 print(f"original list = {a}")
-print(f"sorted list = {quick_sort(a, 0, len(a) - 1)}")
+quick_sort(a, 0, len(a) - 1)
+print(f"sorted list = {a}")
