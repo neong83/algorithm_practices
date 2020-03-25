@@ -12,4 +12,4 @@ def bubble_sort(array):
 array_of_unsorted_int = [1, 3, 5, 2, 8, 6, 7]
 
 bubble_sort(array_of_unsorted_int)
-print(a)
+print(array_of_unsorted_int)
