@@ -6,8 +6,8 @@ a = [4, 10, 3, 5, 1]
 
 
 def heapify(array, parent_node, index):
-    left_child_node = index * 2 + 1
-    right_child_node = index * 2 + 2
+    left_child_node = index * 2
+    right_child_node = index * 2 + 1
     largest_node = index
 
     # print(
