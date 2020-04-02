@@ -9,6 +9,11 @@ class Node:
     left: Type["Node"]
     right: Type["Node"]
 
+    def has_child(self):
+        if self.left or self.right:
+            return True
+        return False
+
 
 class BinaryTree:
     def __init__(self):
@@ -52,6 +57,16 @@ class BinaryTree:
             # print("  call right")
             yield from self.to_list(parent_node.right)
 
+    def node_with_children(self, node:Node):
+        if self.root != node and node and node.has_child():
+            yield node.value
+
+        if node.left:
+            yield from self.node_with_children(node.left)
+
+        if node.right:
+            yield from self.node_with_children(node.right)
+
 
 a = [10, 8, 12, 7, 9, 11, 13]
 print(f"original list = {a}")
@@ -62,22 +77,25 @@ for i in a:
     binary_tree.add(node, start_node)
 print(f"nodes = {binary_tree.root}")
 print(f"sorted list = {list(binary_tree.to_list(binary_tree.root))}")
+print(f"node with child = {list(binary_tree.node_with_children(binary_tree.root))}")
 
 
-for tests in range(10000):
-    array = []
-    for i in range(randint(10, 100)):
-        array.append(randint(1, 100))
-
-    binary_tree = BinaryTree()
-    for i in array:
-        node = Node(i, None, None)
-        start_node = binary_tree.get_start_node_for_node(node, binary_tree.root)
-        binary_tree.add(node, start_node)
-
-    previous_value = -1
-    for i in binary_tree.to_list(binary_tree.root):
-        assert (
-            previous_value <= i
-        ), f"previous value = {previous_value}, current value = {i}"
-        previous_value = i
+#
+#
+# for tests in range(10000):
+#     array = []
+#     for i in range(randint(10, 100)):
+#         array.append(randint(1, 100))
+#
+#     binary_tree = BinaryTree()
+#     for i in array:
+#         node = Node(i, None, None)
+#         start_node = binary_tree.get_start_node_for_node(node, binary_tree.root)
+#         binary_tree.add(node, start_node)
+#
+#     previous_value = -1
+#     for i in binary_tree.to_list(binary_tree.root):
+#         assert (
+#             previous_value <= i
+#         ), f"previous value = {previous_value}, current value = {i}"
+#         previous_value = i
