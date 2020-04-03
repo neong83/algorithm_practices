@@ -30,7 +30,7 @@ class BFSGraph:
         stops = [start]
 
         while stops:
-            place = stops.pop()
+            place = stops.pop(0)
             print(f"Visited place: {place}")
             visited_set.add(place)
             travel_path: Node = self.array[place].head
