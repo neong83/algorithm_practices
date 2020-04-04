@@ -46,14 +46,16 @@ def get_articulation_points_from_paths(paths):
     for current_route in paths.values():
 
         if len(current_route) > 1:
-            ## Option 1
+            # if there are more than 1 route to get from A -> B
+            ## Option 1: remove common locations
             #     [
             #         articulation_points.update(set(a) - set(b))
             #         for a, b in product(current_route, current_route)
             #     ]
-            # Option 2
+            # Option 2: merge the routes and return as articulation points
             articulation_points.update(chain.from_iterable(current_route))
         else:
+            # if there is only one route, take the first location from route
             articulation_points.update({current_route[0][0]})
     return articulation_points
 
