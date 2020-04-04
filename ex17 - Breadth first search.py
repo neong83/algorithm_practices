@@ -3,8 +3,6 @@ from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from collections import defaultdict
 
-# version 1 with linked list
-
 
 class BaseBFSGraph(ABC):
     @abstractmethod
