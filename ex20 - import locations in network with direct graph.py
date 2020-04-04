@@ -27,11 +27,13 @@ def dfs_explore_paths(graph, start):
                 new_path.append(neighbour)
 
                 # print(f"  --- new path {new_path}")
-                if neighbour not in graph.keys():
+                if neighbour not in graph.keys():  # reached to the end of node in graph
                     # print(f" +++ not more sub path")
                     yield new_path
                 else:
-                    queue.append(new_path)
+                    queue.append(
+                        new_path
+                    )  # add to queue when there are additional connections
 
 
 def store_paths(current_path, paths):
