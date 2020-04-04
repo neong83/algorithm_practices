@@ -6,10 +6,9 @@ Map:
     _   o   _   _   _   _
     _   _   _   _   _   o
     _   _   _   o   _   _
-    _   _   _   _   _   _
 """
 from typing import Dict
-from collections import defaultdict
+from collections import defaultdict, deque
 
 
 def build_map_data(post_offices) -> Dict:
@@ -22,6 +21,10 @@ def build_map_data(post_offices) -> Dict:
     return matrix
 
 
+def is_post_office(point, city_map):
+    return True if city_map[point[0]][point[1]] == 0 else False
+
+
 def possible_directions(x, y):
     yield x - 1, y
     yield x + 1, y
@@ -29,40 +32,40 @@ def possible_directions(x, y):
     yield x, y + 1
 
 
-def move_to(point, map):
+def get_neighbours_from_node(point, map):
     for x, y in possible_directions(*point):
         if x in map.keys() and y in map[x].keys():
             yield (x, y)
 
 
-def explore_map(office, city_map):
+def bfs_nearest_office_in_map(office, city_map):
     print(f"--- start at {office}")
     visited_locations = set()
-    stops = [office]
-    travel_path = []
-    found_path = False
+    queue = deque()
+    queue.append([office])
 
-    while stops and not found_path:
-        place = stops.pop(0)
-        travel_path.append(place)
-        print(f"visited place: {place}")
-        visited_locations.add(place)
+    while queue:
+        path = queue.popleft()  # get the first path from queue
+        node = path[-1]  # get the last location from current path
+        print(f"  - current location: {node}")
+        if node not in visited_locations:
+            for neighbour in get_neighbours_from_node(node, city_map):
+                new_path = list(path)  # make a new copy of the current path
+                new_path.append(neighbour)  # add the new location to the path
+                queue.append(new_path)
+                print(f"   - new path: {new_path}")
 
-        for new_place in move_to(place, city_map):
-            if new_place not in visited_locations:
-                stops.append(new_place)
-            if (
-                city_map[new_place[0]][new_place[1]] == 0
-                and not new_place == office
-            ):
-                travel_path.append(new_place)
-                found_path = True
-                print(f"path {travel_path}")
-                break
+                if neighbour != office and is_post_office(neighbour, city_map):
+                    return new_path
+
+            visited_locations.add(node)
+
+    return -1
 
 
 post_office_locations = [(1, 3), (3, 5), (4, 2), (5, 4)]
 city_map = build_map_data(post_office_locations)
 print(city_map)
 for office in post_office_locations:
-    explore_map(office, city_map)
+    path = bfs_nearest_office_in_map(office, city_map)
+    print(f"Path to closest post office from {office} to {path[-1]} is '{path}'")
