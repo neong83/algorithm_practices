@@ -183,7 +183,7 @@ def search_solution(states: deque):
             else:
                 print(f"water start with 8L, 5L, 3L -> '{visual_validation_bucket}'")
 
-    # trying to use DFS to find the shortest solution to handle this problem
+    # trying to use DFS to explore all solutions
     for next_move in explore_next_move(current_state):
         if not is_processed_state(states, next_move):
             states.append(next_move)
