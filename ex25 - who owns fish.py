@@ -34,7 +34,7 @@ WHITE         SWEDEND       BEER          DOG           BLUEMASTER
 
 Process Time:
 Linear process: 45 minutes
-Multi-threads process: 4 minutes
+Multi-processes process (6 Processes): 4 minutes
 """
 
 from enum import Enum
@@ -378,13 +378,13 @@ def arrange_color_for_house(groups: [Group], pools):
                                 and groups[index + 1].item_values[ItemType.HOUSE]
                                 == COLOR.WHITE
                             ):
-                                # validate all possible cases in sequential
+                                # validate all possible cases in sequential format
                                 # arrange_nationality_in_house(groups)
 
                                 possible_groups.append(deepcopy(groups))
 
-    # once mapped out all possible groups for 1st level
-    # process them in 6 threads
+    # mapped out all possible groups for 1st level
+    # spread and process them on 6 processes
     pools.map(arrange_nationality_in_house, possible_groups)
 
 
