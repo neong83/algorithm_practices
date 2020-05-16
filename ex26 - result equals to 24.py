@@ -7,7 +7,6 @@ combinations to see if the result can be equal to 24?
 """
 
 from dataclasses import dataclass
-from collections import deque
 
 
 @dataclass
